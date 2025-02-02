@@ -3,12 +3,17 @@ import { StyleSheet, Button, TextInput, View, Text } from "react-native";
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState("");
+  const [courseGoals, setCourseGoals] = useState([]);
+
   const goalInputHandler = (enteredText) => {
     setEnteredGoalText(enteredText);
   };
 
   const addGoalHandler = () => {
-    console.log(enteredGoalText);
+    setCourseGoals((currentCourseGoals) => [
+      ...currentCourseGoals,
+      enteredGoalText,
+    ]);
   };
 
   return (
@@ -22,7 +27,13 @@ export default function App() {
         <Button title="추가하기" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalsContainer}>
-        <Text>목표 리스트</Text>
+        {courseGoals.map((goal) => (
+          <View style={styles.goalItem}>
+            <Text key={goal} style={styles.goalText}>
+              {goal}
+            </Text>
+          </View>
+        ))}
       </View>
     </View>
   );
@@ -52,5 +63,16 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 6,
+  },
+  goalItem: {
+    marginBottom: 5,
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: "#5e0acc",
+    height: 100,
+    justifyContent: "center",
+  },
+  goalText: {
+    color: "white",
   },
 });
