@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { StyleSheet, Button, TextInput, View, Text } from "react-native";
+import {
+  StyleSheet,
+  Button,
+  TextInput,
+  View,
+  Text,
+  ScrollView,
+} from "react-native";
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState("");
@@ -27,13 +34,15 @@ export default function App() {
         <Button title="추가하기" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalsContainer}>
-        {courseGoals.map((goal) => (
-          <View style={styles.goalItem}>
-            <Text key={goal} style={styles.goalText}>
-              {goal}
-            </Text>
-          </View>
-        ))}
+        <ScrollView>
+          {courseGoals.map((goal) => (
+            <View style={styles.goalItem}>
+              <Text key={goal} style={styles.goalText}>
+                {goal}
+              </Text>
+            </View>
+          ))}
+        </ScrollView>
       </View>
     </View>
   );
